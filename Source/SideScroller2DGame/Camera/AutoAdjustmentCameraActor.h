@@ -17,7 +17,7 @@ public:
 	AAutoAdjustmentCameraActor();
 	virtual void Tick(float DeltaSeconds) override;
 	virtual void BeginPlay() override;
-	void UpdateCameraTransform();
+	void UpdateCameraTransform(float DeltaSeconds);
 	UFUNCTION(BlueprintPure, Category = "Game | GameCamera")
 	int32 GetLocalGamePlayerNumber();
 	const TArray<ULocalPlayer*> GetLocalGamePlayers() const;
@@ -32,11 +32,10 @@ private:
 	FVector GetMinYPoint();
 	FVector GetMaxZPoint();
 	FVector GetMinZPoint();
-
-
-
-
 	void UpdatePlayersLocation();
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Game|Camera")
+	float InterSpeed;
 private:
 	TArray<FVector> PlayersLocation;
 	

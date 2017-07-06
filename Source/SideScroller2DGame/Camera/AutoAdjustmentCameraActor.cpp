@@ -9,13 +9,14 @@
 AAutoAdjustmentCameraActor::AAutoAdjustmentCameraActor()
 {
 	PrimaryActorTick.bCanEverTick = true;
+	InterSpeed = 1.0f;
 }
 
 void AAutoAdjustmentCameraActor::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 	UpdatePlayersLocation();
-	UpdateCameraTransform();
+	UpdateCameraTransform( DeltaSeconds);
 }
 
 void AAutoAdjustmentCameraActor::BeginPlay()
@@ -24,11 +25,13 @@ void AAutoAdjustmentCameraActor::BeginPlay()
 
 }
 
-void AAutoAdjustmentCameraActor::UpdateCameraTransform()
+void AAutoAdjustmentCameraActor::UpdateCameraTransform(float DeltaSeconds)
 {
 	FVector  Center= FVector((GetMaxXPoint()+GetMinXPoint()).X*0.5f, 
 		(GetMaxYPoint() + GetMinYPoint()).Y*0.5f,
 		(GetMaxZPoint() + GetMinZPoint()).Z*0.5f);
+
+	FMath::VInterpTo(GetActorLocation(), Center, DeltaSeconds, InterSpeed);
 	SetActorLocation(Center);
 }
 
@@ -59,13 +62,16 @@ void AAutoAdjustmentCameraActor::SetViewTargetToThisCamera(APlayerController* Pl
 FVector AAutoAdjustmentCameraActor::GetMaxXPoint()
 {
 	FVector ret;
-	for (auto vector:PlayersLocation)
+	if (PlayersLocation.Num() > 0)
 	{
-		if (vector.X > ret.X)
+		ret = PlayersLocation[0];
+		for (int8 i = 1; i < PlayersLocation.Num(); i++)
 		{
-			ret = vector;
+			if (PlayersLocation[i].X > ret.X)
+			{
+				ret = PlayersLocation[i];
+			}
 		}
-		
 	}
 	return ret;
 }
@@ -73,13 +79,16 @@ FVector AAutoAdjustmentCameraActor::GetMaxXPoint()
 FVector AAutoAdjustmentCameraActor::GetMinXPoint()
 {
 	FVector ret;
-	for (auto vector : PlayersLocation)
+	if (PlayersLocation.Num() > 0)
 	{
-		if (vector.X < ret.X)
+		ret = PlayersLocation[0];
+		for (int8 i = 1; i < PlayersLocation.Num(); i++)
 		{
-			ret = vector;
+			if (PlayersLocation[i].X < ret.X)
+			{
+				ret = PlayersLocation[i];
+			}
 		}
-
 	}
 	return ret;
 }
@@ -87,13 +96,16 @@ FVector AAutoAdjustmentCameraActor::GetMinXPoint()
 FVector AAutoAdjustmentCameraActor::GetMaxYPoint()
 {
 	FVector ret;
-	for (auto vector : PlayersLocation)
+	if (PlayersLocation.Num() > 0)
 	{
-		if (vector.Y > ret.Y)
+		ret = PlayersLocation[0];
+		for (int8 i = 1; i < PlayersLocation.Num(); i++)
 		{
-			ret = vector;
+			if (PlayersLocation[i].Y > ret.Y)
+			{
+				ret = PlayersLocation[i];
+			}
 		}
-
 	}
 	return ret;
 }
@@ -101,13 +113,16 @@ FVector AAutoAdjustmentCameraActor::GetMaxYPoint()
 FVector AAutoAdjustmentCameraActor::GetMinYPoint()
 {
 	FVector ret;
-	for (auto vector : PlayersLocation)
+	if (PlayersLocation.Num() > 0)
 	{
-		if (vector.Y < ret.Y)
+		ret = PlayersLocation[0];
+		for (int8 i = 1; i < PlayersLocation.Num(); i++)
 		{
-			ret = vector;
+			if (PlayersLocation[i].Y < ret.Y)
+			{
+				ret = PlayersLocation[i];
+			}
 		}
-
 	}
 	return ret;
 }
@@ -115,13 +130,16 @@ FVector AAutoAdjustmentCameraActor::GetMinYPoint()
 FVector AAutoAdjustmentCameraActor::GetMaxZPoint()
 {
 	FVector ret;
-	for (auto vector : PlayersLocation)
+	if (PlayersLocation.Num() > 0)
 	{
-		if (vector.Z > ret.Z)
+		ret = PlayersLocation[0];
+		for (int8 i = 1; i < PlayersLocation.Num(); i++)
 		{
-			ret = vector;
+			if (PlayersLocation[i].Z > ret.Z)
+			{
+				ret = PlayersLocation[i];
+			}
 		}
-
 	}
 	return ret;
 }
@@ -129,13 +147,16 @@ FVector AAutoAdjustmentCameraActor::GetMaxZPoint()
 FVector AAutoAdjustmentCameraActor::GetMinZPoint()
 {
 	FVector ret;
-	for (auto vector : PlayersLocation)
+	if (PlayersLocation.Num() > 0)
 	{
-		if (vector.Z < ret.Z)
+		ret = PlayersLocation[0];
+		for (int8 i = 1; i < PlayersLocation.Num();i++)
 		{
-			ret = vector;
+			if (PlayersLocation[i].Z < ret.Z)
+			{
+				ret = PlayersLocation[i];
+			}
 		}
-
 	}
 	return ret;
 }
