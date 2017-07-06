@@ -31,7 +31,7 @@ protected:
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
 	// End of APawn interface
 
-
+	virtual void PawnClientRestart();
 public:
 	ASideScroller2DGameCharacter();
 

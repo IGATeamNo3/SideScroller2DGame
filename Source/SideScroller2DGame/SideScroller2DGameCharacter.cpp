@@ -1,6 +1,7 @@
 // Copyright 1998-2016 Epic Games, Inc. All Rights Reserved.
 
 #include "SideScroller2DGame.h"
+#include "Camera/AutoAdjustmentCameraActor.h"
 #include "SideScroller2DGameCharacter.h"
 
 ASideScroller2DGameCharacter::ASideScroller2DGameCharacter()
@@ -37,6 +38,8 @@ ASideScroller2DGameCharacter::ASideScroller2DGameCharacter()
 	GetCharacterMovement()->MaxWalkSpeed = 600.f;
 	GetCharacterMovement()->MaxFlySpeed = 600.f;
 
+	SideViewCameraComponent->SetProjectionMode(ECameraProjectionMode::Orthographic);
+	SideViewCameraComponent->SetOrthoWidth(3000.f);
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named MyCharacter (to avoid direct content references in C++)
 }
@@ -70,6 +73,11 @@ void ASideScroller2DGameCharacter::SetupPlayerInputComponent(class UInputCompone
 
 	PlayerInputComponent->BindTouch(IE_Pressed, this, &ASideScroller2DGameCharacter::TouchStarted);
 	PlayerInputComponent->BindTouch(IE_Released, this, &ASideScroller2DGameCharacter::TouchStopped);
+}
+
+void ASideScroller2DGameCharacter::PawnClientRestart()
+{
+	Super::PawnClientRestart();
 }
 
 void ASideScroller2DGameCharacter::MoveRight(float Value)
