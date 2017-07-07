@@ -6,6 +6,6 @@ public class SideScroller2DGame : ModuleRules
 {
 	public SideScroller2DGame(TargetInfo Target)
 	{
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "Slate", "UMG", "SlateCore" });
 	}
 }
