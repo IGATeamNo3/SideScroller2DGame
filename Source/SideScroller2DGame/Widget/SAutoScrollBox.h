@@ -5,10 +5,26 @@
 #include "InertialScrollManager.h"
 #include "Overscroll.h"
 
-/** SScrollBox can scroll through an arbitrary number of widgets. */
-class SLATE_API SAutoScrollBox : public SScrollBox
+/** SAutoScrollBox can scroll through an arbitrary number of widgets. */
+class SIDESCROLLER2DGAME_API SAutoScrollBox : public SCompoundWidget
 {
 public:
+	SLATE_BEGIN_ARGS(SAutoScrollBox)
+	//: _Style(&FCoreStyle::Get().GetWidgetStyle<FScrollBoxStyle>("ScrollBox"))
+	{}
+	SLATE_END_ARGS();
+
+
+	//SLATE_STYLE_ARGUMENT(FSlateWidgetStyle, BoxStyle);
+
+	void Construct(const FArguments& InArgs);
+
+
+public:
+
 	// SWidget interface
-	//virtual void Tick(const FGeometry& AllottedGeometry, const double InCurrentTime, const float InDeltaTime) override;
+	virtual void Tick(const FGeometry& AllottedGeometry, const double InCurrentTime, const float InDeltaTime) override;
+
+	/** Style resource for the scrollbox */
+	//const FSlateWidgetStyle* BoxStyle;
 };
