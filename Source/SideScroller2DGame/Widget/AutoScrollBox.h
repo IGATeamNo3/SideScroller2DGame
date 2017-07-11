@@ -11,7 +11,7 @@
  * 
  */
 UCLASS()
-class SIDESCROLLER2DGAME_API UAutoScrollBox : public UScrollBox
+class SIDESCROLLER2DGAME_API UAutoScrollBox : public UPanelWidget
 {
 	GENERATED_BODY()
 

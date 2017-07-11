@@ -2,6 +2,7 @@
 
 #include "SideScroller2DGame.h"
 #include "SAutoScrollBox.h"
+#include "AutoScrollBoxSlot.h"
 #include "AutoScrollBox.h"
 
 
@@ -51,14 +52,14 @@ void UAutoScrollBox::PostLoad()
 
 UClass* UAutoScrollBox::GetSlotClass() const
 {
-	return UAutoScrollBox::StaticClass();
+	return UAutoScrollBoxSlot::StaticClass();
 }
 
 void UAutoScrollBox::OnSlotAdded(UPanelSlot* InSlot)
 {
 	if (MyAutoScrollBox.IsValid())
 	{
-		CastChecked<UScrollBoxSlot>(InSlot)->BuildSlot(MyAutoScrollBox.ToSharedRef());
+		CastChecked<UAutoScrollBoxSlot>(InSlot)->BuildSlot(MyAutoScrollBox.ToSharedRef());
 	}
 }
 
@@ -69,7 +70,7 @@ void UAutoScrollBox::OnSlotRemoved(UPanelSlot* InSlot)
 		TSharedPtr<SWidget> Widget = InSlot->Content->GetCachedWidget();
 		if (Widget.IsValid())
 		{
-			//MyAutoScrollBox->RemoveSlot(Widget.ToSharedRef());
+			MyAutoScrollBox->RemoveSlot(Widget.ToSharedRef());
 		}
 	}
 }
@@ -102,14 +103,14 @@ TSharedRef<SWidget> UAutoScrollBox::RebuildWidget()
 		//.Orientation(Orientation)
 		//.ConsumeMouseWheel(ConsumeMouseWheel);
 
-/*	for (UPanelSlot* PanelSlot : Slots)
+	for (UPanelSlot* PanelSlot : Slots)
 	{
-		if (UScrollBoxSlot* TypedSlot = Cast<UScrollBoxSlot>(PanelSlot))
+		if (UAutoScrollBoxSlot* TypedSlot = Cast<UAutoScrollBoxSlot>(PanelSlot))
 		{
 			TypedSlot->Parent = this;
-			TypedSlot->BuildSlot(MyAuScrollBox.ToSharedRef());
+			TypedSlot->BuildSlot(MyAutoScrollBox.ToSharedRef());
 		}
-	}*/
+	}
 
 	return BuildDesignTimeWidget(MyAutoScrollBox.ToSharedRef());
 }
