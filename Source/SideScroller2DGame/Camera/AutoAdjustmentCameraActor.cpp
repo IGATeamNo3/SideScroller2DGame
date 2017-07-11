@@ -7,7 +7,7 @@
 
 
 AAutoAdjustmentCameraActor::AAutoAdjustmentCameraActor()
-{
+{ 
 	PrimaryActorTick.bCanEverTick = true;
 	InterSpeed = 1.0f;
 }

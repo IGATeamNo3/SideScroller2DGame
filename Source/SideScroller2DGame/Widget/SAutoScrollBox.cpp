@@ -161,7 +161,8 @@ void SAutoScrollBox::Tick(const FGeometry& AllottedGeometry, const double InCurr
 	//CurrentOffeset = CurrentOffeset - InDeltaTime * 15.f;
 	Overscroll.ScrollBy(5.f);
 	OnUserScrolled.ExecuteIfBound(0.5f);
-	AutoScrollPanel->PhysicalOffset = 5.f;
+	time += InDeltaTime;
+	AutoScrollPanel->PhysicalOffset = time * ScrollSpeed;
 	
 }
 

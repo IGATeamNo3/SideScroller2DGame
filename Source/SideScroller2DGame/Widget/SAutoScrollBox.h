@@ -87,8 +87,12 @@ private:
 	/** Fired when the user scrolls the scrollbox */
 	FOnUserScrolled OnUserScrolled;
 
-
 	FOverscroll Overscroll;
 
 	EAllowOverscroll AllowOverscroll;
+
+	float ScrollSpeed = 20.f;
+
+	float time = 0.f;
+
 };
