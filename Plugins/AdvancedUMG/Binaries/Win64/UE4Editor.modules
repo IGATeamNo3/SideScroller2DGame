@@ -1,7 +1,7 @@
 {
 	"Changelist" : 3249277,
 	"CompatibleChangelist" : 3195953,
-	"BuildId" : "",
+	"BuildId" : "836403e4-e34d-4dc9-9933-25a7342e3830",
 	"Modules" : 
 	{
 		"AdvancedUMG" : "UE4Editor-AdvancedUMG.dll"

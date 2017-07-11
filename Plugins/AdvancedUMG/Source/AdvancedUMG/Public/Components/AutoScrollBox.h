@@ -2,16 +2,16 @@
 
 #pragma once
 
-#include "Runtime/UMG/Public/UMG.h"
-#include "Runtime/UMG/Public/UMGStyle.h"
-#include "Components/ScrollBox.h"
+
+//#include "Runtime/UMG/Public/UMGStyle.h"
+//#include "Components/ScrollBox.h"
 #include "AutoScrollBox.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class SIDESCROLLER2DGAME_API UAutoScrollBox : public UPanelWidget
+class ADVANCEDUMG_API UAutoScrollBox : public UPanelWidget
 {
 	GENERATED_BODY()
 

@@ -2,16 +2,13 @@
 
 #pragma once
 
-#include "InertialScrollManager.h"
-#include "Overscroll.h"
-
 /** SAutoScrollBox can scroll through an arbitrary number of widgets. */
-class SIDESCROLLER2DGAME_API SAutoScrollBox : public SCompoundWidget
+class ADVANCEDUMG_API SAutoScrollBox : public SCompoundWidget
 {
 public:
 
 	//Auto Scroll Slot
-	class SIDESCROLLER2DGAME_API FSlot : public TSlotBase<FSlot>, public TSupportsContentPaddingMixin<FSlot>
+	class ADVANCEDUMG_API FSlot : public TSlotBase<FSlot>, public TSupportsContentPaddingMixin<FSlot>
 	{
 	public:
 		FSlot()

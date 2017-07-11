@@ -1,7 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "SideScroller2DGame.h"
-#include "SAutoScrollBox.h"
+#include "AdvancedUMGPrivatePCH.h"
 #include "AutoScrollBoxSlot.h"
 #include "AutoScrollBox.h"
 

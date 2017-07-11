@@ -27,6 +27,11 @@ public class AdvancedUMG : ModuleRules
 			new string[]
 			{
 				"Core",
+                "Engine",
+                "InputCore",
+                "Slate",
+                "UMG",
+                "SlateCore"
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);
@@ -39,6 +44,7 @@ public class AdvancedUMG : ModuleRules
 				"Engine",
 				"Slate",
 				"SlateCore",
+                "UMG"
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);

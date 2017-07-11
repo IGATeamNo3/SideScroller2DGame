@@ -11,7 +11,7 @@
 
 /** The Slot for the UScrollBox, contains the widget that are scrollable */
 UCLASS()
-class SIDESCROLLER2DGAME_API UAutoScrollBoxSlot : public UPanelSlot
+class ADVANCEDUMG_API UAutoScrollBoxSlot : public UPanelSlot
 {
 	GENERATED_UCLASS_BODY()
 public:
