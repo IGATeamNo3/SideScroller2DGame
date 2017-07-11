@@ -9,18 +9,8 @@
 #define LOCTEXT_NAMESPACE "UMG"
 UAutoScrollBox::UAutoScrollBox()
 {
-	ScrollSpeed = 0.f;
+	ScrollSpeed = 10.f;
 }
-/*
-void UAutoScrollBox::Tick(const FGeometry& AllottedGeometry, const double InCurrentTime, const float InDeltaTime)
-{
-	//Super::Tick(AllottedGeometry, InCurrentTime, InDeltaTime);
-	if (bIsActiveScroll)
-	{
-		SetScrollOffset(GetScrollOffset() - ScrollSpeed*InDeltaTime);
-		//ScrollSpeed * InDeltaTime;
-	}
-}*/
 
 void UAutoScrollBox::SetActiveScroll(bool bNewActive, bool bReset)
 {
@@ -40,13 +30,24 @@ void UAutoScrollBox::SetActiveScroll(bool bNewActive, bool bReset)
 
 }
 
+void UAutoScrollBox::SetIsScrollLoop(bool bNewLoop)
+{
+	bLoop = bNewLoop;
+}
+
 void UAutoScrollBox::PostLoad()
 {
 	Super::PostLoad();
-	if (bAutoActiveScroll)
+/*	if (bAutoActiveScroll)
 	{
 		Activate(true);
-	}
+	}*/
+}
+
+void UAutoScrollBox::SynchronizeProperties()
+{
+	SetActiveScroll(bIsActiveScroll, true);
+	Super::SynchronizeProperties();
 }
 
 UClass* UAutoScrollBox::GetSlotClass() const
@@ -79,13 +80,15 @@ void UAutoScrollBox::Activate(bool bReset)
 	if (bReset || ShouldActivate() == true)
 	{
 		bIsActiveScroll = true;
-		//
+		
 	}
+	MyAutoScrollBox->SetActiveScroll(bIsActiveScroll, bReset);
 }
 
 void UAutoScrollBox::Deactivate()
 {
 	bIsActiveScroll = false;
+	MyAutoScrollBox->SetActiveScroll(bIsActiveScroll, true);
 }
 
 bool UAutoScrollBox::ShouldActivate() const
@@ -96,7 +99,10 @@ bool UAutoScrollBox::ShouldActivate() const
 
 TSharedRef<SWidget> UAutoScrollBox::RebuildWidget()
 {
-	MyAutoScrollBox = SNew(SAutoScrollBox);
+	MyAutoScrollBox = SNew(SAutoScrollBox)
+		.bIsActiveScroll(bIsActiveScroll)
+		.bLoop(bLoop)
+		.ScrollSpeed(ScrollSpeed);
 		//.Style(&WidgetStyle)
 		//.ScrollBarStyle(&WidgetBarStyle)
 		//.Orientation(Orientation)

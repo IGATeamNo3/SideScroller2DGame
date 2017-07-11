@@ -17,11 +17,16 @@ class ADVANCEDUMG_API UAutoScrollBox : public UPanelWidget
 
 public:
 	UAutoScrollBox();
+
 	UFUNCTION(BlueprintCallable, Category = "Auto Scroll Box")
 	void SetActiveScroll(bool bNewActive, bool bReset);
 
+	UFUNCTION(BlueprintCallable, Category = "Auto Scroll Box")
+	void SetIsScrollLoop(bool bNewLoop);
 
 	virtual void PostLoad() override;
+
+	virtual void SynchronizeProperties();
 
 #if WITH_EDITOR
 	//~ Begin UWidget Interface
@@ -50,7 +55,7 @@ public:
 	
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Auto Scroll Box")
-		uint8 bAutoActiveScroll : 1;
+		uint8 bIsActiveScroll : 1;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Auto Scroll Box")
 		uint8 bLoop : 1;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Auto Scroll Box")
@@ -60,6 +65,6 @@ protected:
 	TSharedPtr<class SAutoScrollBox> MyAutoScrollBox;
 private:
 
-	uint8 bIsActiveScroll : 1;
+	//uint8 bIsActiveScroll : 1;
 	
 };

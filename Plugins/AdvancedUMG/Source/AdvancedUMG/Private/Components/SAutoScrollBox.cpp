@@ -144,6 +144,9 @@ void SAutoScrollBox::Construct(const FArguments& InArgs)
 {
 	Orientation = InArgs._Orientation;
 	OnUserScrolled = InArgs._OnUserScrolled;
+	bLoop = InArgs._bLoop;
+	bIsActiveScroll = InArgs._bIsActiveScroll;
+	ScrollSpeed = InArgs._ScrollSpeed;
 	SAssignNew(AutoScrollPanel, SAutoScrollPanel, InArgs.Slots)
 		.Orientation(Orientation);
 	if (Orientation == Orient_Vertical)
@@ -158,12 +161,45 @@ void SAutoScrollBox::Construct(const FArguments& InArgs)
 
 void SAutoScrollBox::Tick(const FGeometry& AllottedGeometry, const double InCurrentTime, const float InDeltaTime)
 {
-	//CurrentOffeset = CurrentOffeset - InDeltaTime * 15.f;
-	Overscroll.ScrollBy(5.f);
-	OnUserScrolled.ExecuteIfBound(0.5f);
-	time += InDeltaTime;
-	AutoScrollPanel->PhysicalOffset = time * ScrollSpeed;
 	
+	if (bIsActiveScroll)
+	{
+		time += InDeltaTime;
+		AutoScrollPanel->PhysicalOffset = time * ScrollSpeed;
+	}	
+}
+
+void SAutoScrollBox::SetActiveScroll(bool bNewActive, bool bReset)
+{
+	// if it wants to activate
+	if (bNewActive)
+	{
+		// make sure to check if it should activate
+		Activate(bReset);
+	}
+	// otherwise, make sure it shouldn't activate
+	else
+	{
+		Deactivate();
+	}
+}
+void SAutoScrollBox::Activate(bool bReset)
+{
+	if (bReset || ShouldActivate() == true)
+	{
+		bIsActiveScroll = true;
+	}
+}
+
+void SAutoScrollBox::Deactivate()
+{
+	bIsActiveScroll = false;
+}
+
+bool SAutoScrollBox::ShouldActivate() const
+{
+	// if not active, should activate
+	return !bIsActiveScroll;
 }
 
 void SAutoScrollBox::ConstructHorizontalLayout()

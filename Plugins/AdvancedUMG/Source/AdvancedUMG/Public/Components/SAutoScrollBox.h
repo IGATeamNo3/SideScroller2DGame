@@ -39,13 +39,20 @@ public:
 
 
 	SLATE_BEGIN_ARGS(SAutoScrollBox)
-	//: _Style(&FCoreStyle::Get().GetWidgetStyle<FScrollBoxStyle>("ScrollBox"))
+		//: _Style(&FCoreStyle::Get().GetWidgetStyle<FScrollBoxStyle>("ScrollBox"))
 		: _Orientation(Orient_Vertical)
 		, _OnUserScrolled()
+		, _bIsActiveScroll(true)
+		, _bLoop(true)
+		, _ScrollSpeed(20.f)
 	{}
 
 	SLATE_ARGUMENT(FOnUserScrolled, OnUserScrolled);
-	SLATE_ARGUMENT(EOrientation, Orientation)
+	SLATE_ARGUMENT(EOrientation, Orientation);
+	SLATE_ARGUMENT(bool, bIsActiveScroll);
+	SLATE_ARGUMENT(float ,ScrollSpeed)
+	SLATE_ARGUMENT(bool, bLoop);
+
 	SLATE_SUPPORTS_SLOT(FSlot)
 
 	SLATE_END_ARGS();
@@ -68,12 +75,20 @@ public:
 	// SWidget interface
 	virtual void Tick(const FGeometry& AllottedGeometry, const double InCurrentTime, const float InDeltaTime) override;
 
+	void SetActiveScroll(bool bNewActive, bool bReset);
+
 private:
 	/** Constructs internal layout widgets for scrolling vertically using the existing ScrollPanel and ScrollBar. */
 	void ConstructVerticalLayout();
 
 	/** Constructs internal layout widgets for scrolling horizontally using the existing ScrollPanel and ScrollBar. */
 	void ConstructHorizontalLayout();
+
+private:
+	void Activate(bool bReset);
+	void Deactivate();
+	bool ShouldActivate() const;
+
 private:
 
 	/** The panel which stacks the child slots */
@@ -84,11 +99,14 @@ private:
 	/** Fired when the user scrolls the scrollbox */
 	FOnUserScrolled OnUserScrolled;
 
-	FOverscroll Overscroll;
 
-	EAllowOverscroll AllowOverscroll;
+	bool bAutoActiveScroll;
 
-	float ScrollSpeed = 20.f;
+	bool bIsActiveScroll;
+
+	bool bLoop;
+
+	float ScrollSpeed;
 
 	float time = 0.f;
 
