@@ -14,7 +14,15 @@
 			]
 		}
 	],
-	"AdditionalPluginDirectories": [
-		"/SideScroller2DGame/Plugins"
+	"Plugins": [
+		{
+			"Name": "AdvancedUMG",
+			"Enabled": true
+		},
+		{
+			"Name": "LowEntryXmlParser",
+			"Enabled": true,
+			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/content/5ac057200f49458f8ff82cb771ca23b6"
+		}
 	]
 }

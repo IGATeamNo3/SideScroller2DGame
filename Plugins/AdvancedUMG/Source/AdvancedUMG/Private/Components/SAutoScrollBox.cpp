@@ -147,6 +147,7 @@ void SAutoScrollBox::Construct(const FArguments& InArgs)
 	bLoop = InArgs._bLoop;
 	bIsActiveScroll = InArgs._bIsActiveScroll;
 	ScrollSpeed = InArgs._ScrollSpeed;
+	BoxSize = InArgs._BoxSize;
 	SAssignNew(AutoScrollPanel, SAutoScrollPanel, InArgs.Slots)
 		.Orientation(Orientation);
 	if (Orientation == Orient_Vertical)
@@ -162,10 +163,18 @@ void SAutoScrollBox::Construct(const FArguments& InArgs)
 void SAutoScrollBox::Tick(const FGeometry& AllottedGeometry, const double InCurrentTime, const float InDeltaTime)
 {
 	
-	if (bIsActiveScroll)
+	if (bIsActiveScroll && AutoScrollPanel.IsValid())
 	{
+		float StartLocation = AllottedGeometry.GetLocalSize().Y;
 		time += InDeltaTime;
-		AutoScrollPanel->PhysicalOffset = time * ScrollSpeed;
+		AutoScrollPanel->PhysicalOffset = time * ScrollSpeed - StartLocation;
+		float Size = AutoScrollPanel->GetDesiredSize().Y;
+		if (AutoScrollPanel->PhysicalOffset > Size)
+		{
+			AutoScrollPanel->PhysicalOffset = -StartLocation;
+			time = 0.f;
+			
+		}
 	}	
 }
 
@@ -181,6 +190,10 @@ void SAutoScrollBox::SetActiveScroll(bool bNewActive, bool bReset)
 	else
 	{
 		Deactivate();
+	}
+	if (bReset)
+	{
+		time = 0.f;
 	}
 }
 void SAutoScrollBox::Activate(bool bReset)

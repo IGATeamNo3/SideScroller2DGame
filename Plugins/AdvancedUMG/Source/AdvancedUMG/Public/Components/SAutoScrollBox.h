@@ -45,6 +45,7 @@ public:
 		, _bIsActiveScroll(true)
 		, _bLoop(true)
 		, _ScrollSpeed(20.f)
+		, _BoxSize(FVector2D())
 	{}
 
 	SLATE_ARGUMENT(FOnUserScrolled, OnUserScrolled);
@@ -52,6 +53,7 @@ public:
 	SLATE_ARGUMENT(bool, bIsActiveScroll);
 	SLATE_ARGUMENT(float ,ScrollSpeed)
 	SLATE_ARGUMENT(bool, bLoop);
+	SLATE_ARGUMENT(FVector2D, BoxSize)
 
 	SLATE_SUPPORTS_SLOT(FSlot)
 
@@ -110,4 +112,5 @@ private:
 
 	float time = 0.f;
 
+	FVector2D BoxSize;
 };

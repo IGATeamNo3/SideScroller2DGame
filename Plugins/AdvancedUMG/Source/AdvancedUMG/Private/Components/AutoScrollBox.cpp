@@ -99,10 +99,18 @@ bool UAutoScrollBox::ShouldActivate() const
 
 TSharedRef<SWidget> UAutoScrollBox::RebuildWidget()
 {
+	//UCanvasPanelSlot* ParentSlot = Cast<UCanvasPanelSlot>(GetParent()->Slot);
+	FVector2D BoxSize;
+	if (Slot)
+	{
+		//BoxSize = Slot->Size
+	}
+	
 	MyAutoScrollBox = SNew(SAutoScrollBox)
 		.bIsActiveScroll(bIsActiveScroll)
 		.bLoop(bLoop)
-		.ScrollSpeed(ScrollSpeed);
+		.ScrollSpeed(ScrollSpeed)
+		.BoxSize(BoxSize);
 		//.Style(&WidgetStyle)
 		//.ScrollBarStyle(&WidgetBarStyle)
 		//.Orientation(Orientation)
@@ -116,7 +124,6 @@ TSharedRef<SWidget> UAutoScrollBox::RebuildWidget()
 			TypedSlot->BuildSlot(MyAutoScrollBox.ToSharedRef());
 		}
 	}
-
 	return BuildDesignTimeWidget(MyAutoScrollBox.ToSharedRef());
 }
 

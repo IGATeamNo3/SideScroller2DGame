@@ -1,0 +1,9 @@
+{
+	"Changelist" : 3249277,
+	"CompatibleChangelist" : 3195953,
+	"BuildId" : "cea1625c-c630-4967-8e47-143897d4da5e",
+	"Modules" : 
+	{
+		"AdvancedUMG" : "UE4Editor-AdvancedUMG-Win64-DebugGame.dll"
+	}
+}

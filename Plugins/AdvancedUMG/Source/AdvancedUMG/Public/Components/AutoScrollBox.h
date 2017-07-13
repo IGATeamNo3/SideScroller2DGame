@@ -56,7 +56,7 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Auto Scroll Box")
 		uint8 bIsActiveScroll : 1;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Auto Scroll Box")
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Auto Scroll Box")
 		uint8 bLoop : 1;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Auto Scroll Box")
 		float ScrollSpeed;
